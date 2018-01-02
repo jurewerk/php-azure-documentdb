@@ -61,6 +61,8 @@ class AzureRequest {
 			if (isset($options['query']))
 			{
 				$headers[] = 'x-ms-documentdb-isquery: True';
+				// Added for crosspartiton
+				$headers[] = 'x-ms-documentdb-query-enablecrosspartition: true';
                 $headers[] = 'x-ms-max-item-count: -1';
 				$headers[] = 'Content-Type: application/sql';
 				$headers[] = 'Content-Length: ' . strlen($options['query']);
@@ -70,6 +72,8 @@ class AzureRequest {
 			else
 			{
 				$headers[] = 'Content-Type: application/json';
+				// Added for crosspartiton
+				$headers[] = 'x-ms-documentdb-query-enablecrosspartition: true';
                 $headers[] = 'x-ms-max-item-count: -1';
 				$headers[] = 'Content-Length: ' . strlen($data);
 

@@ -106,4 +106,19 @@ class Document extends Resources {
 
 		return $res;
 	}
+	
+	public function getRange() {
+        $path = 'dbs/' . $this->azureDB->get('database')->getProperty('_rid') . '/colls/' . $this->azureDB->get('collection')->getProperty('_rid') . '/pkranges';
+        $res = $this->azureDB->request->request(
+            $path,
+            'GET',
+            array(
+                'query' => "",
+                'parameters' => array()
+            ),
+            'pkranges',
+            $this->azureDB->get('collection')->getProperty('_rid')
+        );
+        return $res;
+    }
 }

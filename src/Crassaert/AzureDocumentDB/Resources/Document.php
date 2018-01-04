@@ -89,21 +89,21 @@ class Document extends Resources {
 	}
 
 	// TODO : Parameters
-	public function query($sql = '', $parameters = array())
+	public function query($sql = '', $partition = -1, $parameters = array())
 	{
 		$path = 'dbs/' . $this->azureDB->get('database')->getProperty('_rid') . '/colls/' . $this->azureDB->get('collection')->getProperty('_rid') . '/docs';
-
 		$res = $this->azureDB->request->request(
 			$path,
 			'POST',
-			array(
+            array(
 				'query' => $sql,
 				'parameters' => $parameters
 				),
 			'docs',
-			$this->azureDB->get('collection')->getProperty('_rid')
+			$this->azureDB->get('collection')->getProperty('_rid'),
+            null,
+            $partition
 			);
-
 		return $res;
 	}
 	
